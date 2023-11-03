@@ -1,0 +1,173 @@
+
+
+    <div>
+        <nav class="nav-bar">
+            <section class="main">
+                <img src="assets/imagenes/logo.jpg" alt="logo">
+                <div class="title-center-container">
+                    <h1 class="title-container">
+                        <span class="black" id="title">Recetario</span>
+                    </h1>
+                </div>
+            </section>
+            <div class="container-nav">
+                <a href="#" class="main">Inicio</a>
+                <a href="#recipes-id" class="recipes">Recetas</a>
+                <a href="#id-about" class="about">Sobre nosotros</a>
+                <div class="buscar">
+                    <div class="research-left-container">
+                        <a href="javascript:void(0);" class="researcher" style="border: none;">
+                            <input type="text" placeholder="Buscar receta">
+                            <i class="fa-solid fa-magnifying-glass" style="color: #000000;"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div class="carrusel-container" id="id-carrusel">
+        <div class="fond-container" id="id-fond1">
+            <a href="#id-fond4">
+                <img src="assets/icons/arrow-left-circle.svg" alt="arrow-left">
+            </a>
+            <div class="fond-text-container">
+                <p>Cuenca-Ecuador</p>
+                <h1>Cuy asado con papas</h1>
+                <p>El cuy con papas es una comida típica de la ciudad de Cuenca en Ecuador. Este platillo se lo consume
+                    mucho por la población, siendo asi la domesticación de este animal hasta su consumo. Es simple de
+                    preparar
+                    y cuenta con una exquisitez emblemática.
+                </p>
+            </div>
+            <a href="#id-fond2">
+                <img src="assets/icons/arrow-right-circle.svg" alt="arrow-right">
+            </a>
+        </div>
+        <div class="fond-container" id="id-fond2">
+            <a href="#id-fond1">
+                <img src="assets/icons/arrow-left-circle.svg" alt="arrow-left">
+            </a>
+            <div class="fond-text-container">
+                <p>Antioquia-Colombia</p>
+                <h1>Bandeja Paisa</h1>
+                <p>La bandeja Paisa es uno de los platillos mas representativos de Colombia,
+                    su variedad de sabores la hace una comida sin igual. Es un plato compuesto por arroz,
+                    frijol, carne freída, plátano, y acompañado con arepa.
+                </p>
+            </div>
+            <a href="#id-fond3">
+                <img src="assets/icons/arrow-right-circle.svg" alt="arrow-right">
+            </a>
+        </div>
+        <div class="fond-container" id="id-fond3">
+            <a href="#id-fond2">
+                <img src="assets/icons/arrow-left-circle.svg" alt="arrow-left">
+            </a>
+            <div class="fond-text-container">
+                <p>Argentina</p>
+                <h1>Mate</h1>
+                <p>El mate es una bebida tradicional en el sur de Latinoamérica, principalmente en Argentina.
+                    Este es elaborado con hojas de yerba de mate y agua caliente. Ademas de tener un sabor
+                    característico, tiene propiedades estimulantes y de respeto hacia los demás.
+                </p>
+            </div>
+            <a href="#id-fond4">
+                <img src="assets/icons/arrow-right-circle.svg" alt="arrow-right">
+            </a>
+        </div>
+        <div class="fond-container" id="id-fond4">
+            <a href="#id-fond3">
+                <img src="assets/icons/arrow-left-circle.svg" alt="arrow-left">
+            </a>
+            <div class="fond-text-container">
+                <p>Extremadura-España</p>
+                <h1>Tortilla de patata</h1>
+                <p>La tortilla de patata es una de las comidas tradicionales de la mesa Española. Es muy
+                    popular en España, pues su simple preparación la cual cosiste en huevo, sal, papas y aceite
+                    la hacen accesible para todos.
+                </p>
+            </div>
+            <a href="#id-fond1">
+                <img src="assets/icons/arrow-right-circle.svg" alt="arrow-right">
+            </a>
+        </div>
+    </div>
+
+    <div class="title-init" id="recipes-id">
+        <h1 id="recipes-title">Recetas</h1>
+    </div>
+    <div class="recipes-container" id="food-container">
+
+
+
+        <div class="button-more">
+            <input type="submit" value="Ver mas" class="summit-more">
+        </div>
+    </div>
+
+    <div class="form-container">
+        <div class="uno">
+            <h1>Envía <br> tu <br> receta</h1>
+            <p>En el siguiente espacio tu puedes crear una receta para ser publicada en el sitio web
+                recuerda colocar todos los ingredientes como todos los pasos y una imagen preview de
+                tu platillo.
+            </p>
+        </div>
+        <form id="formRecipes">
+            <label for="nombre">Nombre de la Receta:</label>
+            <input type="text" id="nombre" name="nombre" required class="input-name">
+
+            <label for="ingredientes">Ingredientes:</label>
+            <textarea id="ingredientes" name="ingredientes" rows="4" required class="area-ingredientes"></textarea>
+
+            <label for="preparacion">Instrucciones de Preparación:</label>
+            <textarea id="preparacion" name="preparacion" rows="4" required class="area-preparacion"></textarea>
+
+            <label for="imagen">Imagen de la Receta:</label>
+            <input type="file" id="imagen" name="imagen" accept="image/*">
+
+            <button type="button" onclick="enviarReceta()" class="summit-enviar">Enviar Receta </button>
+        </form>
+
+    </div>
+
+    <section class="about-container" id="id-about">
+
+        <div class="photo-about-us">
+            <img class="our-photo" src="/imagenes/depositphotos_51933801-stock-photo-labrador-puppies-in-a-basket.jpg"
+                alt="">
+        </div>
+        <div class="about">
+            <h2 id="about-title">Sobre <br> nosotros</h2>
+            <p class="about-pg">
+                Los recetarios son de suma importancia para compartir conocimientos de cocina con futuras generaciones.
+                <br>
+                Se ha llevado a cabo una recopilacion de los platos mas importantes y emblematicos de nuestro pais.
+                Esto conlleva un repaso rapido por la gastronomia ecuatoriana. <br>
+                Somos Anthony y Daniel, quienes crearon esta pagina web con el proposito de dar a conocer nuestro pais
+                mediante
+                la creacion de un recetario, el cual guarda todos los pasos para llevar a cabo una degustacion de dicha
+                gastronomia.<br>
+                Ademas somos entusiastas de la programacion, formamos parte del Grupo IEEE de la Universidad Politecnica
+                Salesiana del Ecuador
+                Actuamlemte cursamos el quinto semestra de nuestra titulacion de pregrado, por lo que aspiramos a
+                completar todos nuestros
+                creditos estudiantilesy de esta forma afianzar nuestro conocimiento. <br>
+            </p>
+        </div>
+    </section>
+    <footer>
+        <div class="media-bar-container">
+            <div class="text">
+                <p>Sigenos en nuestras redes</p>
+            </div>
+            <ul class="media-bar">
+                <li><a target="_blank" href="https://www.instagram.com/" class="link-ig"><i
+                            class="fa-brands fa-instagram" style="color: #000000;"></i></a></li>
+                <li><a target="_blank" href="https://www.facebook.com/" class="link-fb"><i class="fa-brands fa-facebook"
+                            style="color: #000000;"></i></a></li>
+                <li><a target="_blank" href="https://www.youtube.com/" class="link-yt"><i class="fa-brands fa-youtube"
+                            style="color: #000000;"></i></a></li>
+            </ul>
+        </div>
+    </footer>
