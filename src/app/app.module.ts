@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { IndexComponent } from './index/index.component';
 import { InterfaceRecipeComponent } from './interface-recipe/interface-recipe.component';
 import { ViewRecipeComponent } from './view-recipe/view-recipe.component';
+import { RecetasComponent } from './component/recetas/recetas.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     IndexComponent,
     InterfaceRecipeComponent,
-    ViewRecipeComponent
+    ViewRecipeComponent,
+    RecetasComponent
   ],
   imports: [
     BrowserModule,

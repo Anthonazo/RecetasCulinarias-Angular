@@ -6,11 +6,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./index.component.css']
 })
 export class IndexComponent {
-  
+  recetasLocalStorages: any[] = []; // Declara un arreglo para almacenar las recetas del Local Storage
+
+
+
   recetasDefault = [
+
+
     {
       identificador: 1,
-      imagen: "/imagenes/img-recipes/seco-pollo.jpg",
+      imagen: "assets/imagenes/img-recipes/seco-pollo.jpg",
       nombre: "Seco de Pollo",
       tipo: "plato principal",
       ingredientes:
@@ -20,7 +25,7 @@ export class IndexComponent {
     },
     {
       identificador: 2,
-      imagen: "/imagenes/img-recipes/pollo-chan.jpeg",
+      imagen: "assets/imagenes/img-recipes/pollo-chan.jpeg",
       nombre: "Pollo con Champiñones",
       tipo: "Plato principal",
       ingredientes:
@@ -30,7 +35,7 @@ export class IndexComponent {
     },
     {
       identificador: 3,
-      imagen: "/imagenes/img-recipes/casuela-pollo.jpg",
+      imagen: "assets/imagenes/img-recipes/casuela-pollo.jpg",
       nombre: "Cazuela de Pollo",
       tipo: "Plato secundario",
       ingredientes: "5 Tutos de pollo sin su piel\n2 Cucharadas de aceite\n1 Diente de ajo cortado finamente\n1/2 Cebolla cortada en cuadritos\n2 Litros de agua caliente\n2 Zanahorias cortadas en bastones pequeños\nOrégano a gusto\nPimienta a gusto\nComino a gusto\n5 Trozos de choclo medianos\n5 Papas medianas peladas\n5 Trozos medianos de zapallo camote\n1 Tableta de caldo de gallina MAGGI®\n1/3 Taza de arroz\n2 Tazas de porotos verdes\nSal a gusto\nPerejil cortado finamente para decorar",
@@ -39,7 +44,7 @@ export class IndexComponent {
     },
     {
       identificador: 4,
-      imagen: "/imagenes/img-recipes/solomillo-cerdo.jpg",
+      imagen: "assets/imagenes/img-recipes/solomillo-cerdo.jpg",
       nombre: "Solomillo de Cerdo",
       tipo: "Plato principal",
       ingredientes: "YErbas",
@@ -48,7 +53,7 @@ export class IndexComponent {
     },
     {
       identificador: 5,
-      imagen: "/imagenes/img-recipes/carne-papas.jpeg",
+      imagen: "assets/imagenes/img-recipes/carne-papas.jpeg",
       nombre: "Carne al horno con papas",
       tipo: "Plato principal",
       ingredientes:
@@ -58,7 +63,7 @@ export class IndexComponent {
     },
     {
       identificador: 6,
-      imagen: "/imagenes/img-recipes/albondigas-fideo.jpeg",
+      imagen: "assets/imagenes/img-recipes/albondigas-fideo.jpeg",
       nombre: "Espagueti con albóndigas de carne",
       tipo: "Plato principal",
       ingredientes:
@@ -68,12 +73,9 @@ export class IndexComponent {
     },
   ];
 
-
-
-
-
   constructor() {
-    // Escuchar el evento "DOMContentLoaded" para asegurarse de que el DOM se ha cargado
+
+
     document.addEventListener("DOMContentLoaded", () => {
       // Comienza por verificar si las recetas ya se han cargado
       const seCargoRecetas = localStorage.getItem("seCargoRecetas");
@@ -92,13 +94,20 @@ export class IndexComponent {
         // Guarda las recetas actualizadas en el Local Storage
         localStorage.setItem("recetas", JSON.stringify(recetasLocalStorage));
       }
-
-      // Luego, puedes continuar con el resto de la lógica de tu componente
-      // Por ejemplo, manejar la búsqueda de recetas, mostrar resultados, etc.
-
-      // Aquí puedes seguir con el resto de tu código...
     });
 
   }
 
+
+
+  ngOnInit(): void {
+    // Se ejecuta cuando el componente se inicializa
+
+    // Obtiene las recetas del Local Storage y las asigna a la variable recetasLocalStorage
+    const recetasLocalStorageString = localStorage.getItem("recetas");
+    this.recetasLocalStorages = recetasLocalStorageString ? JSON.parse(recetasLocalStorageString) : [];
+
+    // Ahora, recetasLocalStorage contiene las recetas del Local Storage
+  }
+  
 }
