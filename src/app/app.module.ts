@@ -7,6 +7,7 @@ import { IndexComponent } from './index/index.component';
 import { InterfaceRecipeComponent } from './interface-recipe/interface-recipe.component';
 import { ViewRecipeComponent } from './view-recipe/view-recipe.component';
 import { RecetasComponent } from './component/recetas/recetas.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -14,11 +15,13 @@ import { RecetasComponent } from './component/recetas/recetas.component';
     IndexComponent,
     InterfaceRecipeComponent,
     ViewRecipeComponent,
-    RecetasComponent
+    RecetasComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

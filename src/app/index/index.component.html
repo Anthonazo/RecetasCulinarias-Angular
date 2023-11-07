@@ -14,12 +14,12 @@
             <a href="#id-about" class="about">Sobre nosotros</a>
             <div class="buscar">
                 <div class="research-left-container">
-                    <a href="javascript:void(0);" class="researcher" style="border: none;">
-                        <input type="text" placeholder="Buscar receta">
-                        <i class="fa-solid fa-magnifying-glass" style="color: #000000;"></i>
-                    </a>
+                  <a href="javascript:void(0);" class="researcher" style="border: none;">
+                    <input type="text" placeholder="Buscar receta" [(ngModel)]="terminoBusqueda" (input)="buscarRecetas(terminoBusqueda)">
+                    <i class="fa-solid fa-magnifying-glass" style="color: #000000;"></i>
+                  </a>
                 </div>
-            </div>
+              </div>
         </div>
     </nav>
 </div>
@@ -95,12 +95,13 @@
     <h1 id="recipes-title">Recetas</h1>
 </div>
 
+<div class="message"></div>
 <div class="recipes-container">
-    <div *ngFor="let receta of recetasLocalStorages" class="recipe">
+    <div *ngFor="let receta of recetasFiltradas" class="recipe">
         <a [routerLink]="['/recipe', receta.identificador]" class="recipe-link">
             <img [src]="receta.imagen" alt="Imagen de la receta" class="recipe-image">
             <h1 class="recipe-title">{{ receta.nombre }}</h1>
-            <p class="recipe-description">Descripción de la receta.</p>
+            <p class="recipe-description">{{receta.tipo}}</p>
         </a>
     </div>
 </div>
@@ -128,7 +129,7 @@
         <label for="imagen">Imagen de la Receta:</label>
         <input type="file" id="imagen" name="imagen" accept="image/*">
 
-        <button type="button" onclick="enviarReceta()" class="summit-enviar">Enviar Receta </button>
+        <button type="button" (click)="enviarReceta()" class="summit-enviar">Enviar Receta </button>
     </form>
 
 </div>

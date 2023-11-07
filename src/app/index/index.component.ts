@@ -7,6 +7,8 @@ import { Component } from '@angular/core';
 })
 export class IndexComponent {
   recetasLocalStorages: any[] = []; // Declara un arreglo para almacenar las recetas del Local Storage
+  recetasFiltradas: any[] = []; // Agrega un arreglo para almacenar las recetas filtradas
+  terminoBusqueda: string = ''; // Declara la propiedad terminoBusqueda
 
 
 
@@ -74,8 +76,6 @@ export class IndexComponent {
   ];
 
   constructor() {
-
-
     document.addEventListener("DOMContentLoaded", () => {
       // Comienza por verificar si las recetas ya se han cargado
       const seCargoRecetas = localStorage.getItem("seCargoRecetas");
@@ -94,20 +94,107 @@ export class IndexComponent {
         // Guarda las recetas actualizadas en el Local Storage
         localStorage.setItem("recetas", JSON.stringify(recetasLocalStorage));
       }
+
+      const recetasLocalStorageString = localStorage.getItem("recetas");
+      this.recetasLocalStorages = recetasLocalStorageString ? JSON.parse(recetasLocalStorageString) : [];
+
+      // Ahora, recetasLocalStorage contiene las recetas del Local Storage
+      this.recetasFiltradas = this.recetasLocalStorages;
     });
-
   }
 
 
+  buscarRecetas(terminoBusqueda: string) {
+    const text = document.querySelector('.message')
+    if (terminoBusqueda) {
+      // Filtra las recetas que coinciden con el término de búsqueda
+      this.recetasFiltradas = this.recetasLocalStorages.filter(receta =>
+        receta.nombre.toLowerCase().includes(terminoBusqueda.toLowerCase()));
+      if (this.recetasFiltradas.length === 0) {
+        // Aquí puedes realizar alguna acción o mostrar un mensaje
+        if (text) {
+          text.textContent = 'No hay recetas';
+          (text as HTMLElement).style.textAlign = 'center'; // Centrar el texto horizontalmente
+        }
+      } else {
+        if (text) {
+          text.textContent = '';
+        }
+      }
+    }
+    else {
+      // Si no hay término de búsqueda, muestra todas las recetas
+      this.recetasFiltradas = this.recetasLocalStorages;
+      if (text) {
+        text.textContent = '';
+      }
+    }
+  }
 
-  ngOnInit(): void {
-    // Se ejecuta cuando el componente se inicializa
+  async getImagen(imagenFile: File): Promise<string | null> {
+    return new Promise((resolve, reject) => {
+      if (imagenFile) {
+        const reader = new FileReader();
 
-    // Obtiene las recetas del Local Storage y las asigna a la variable recetasLocalStorage
+        reader.onload = function (event) {
+          if (event && event.target) {
+            const base64Image = event.target.result as string;
+            // No guardamos la imagen en el Local Storage aquí, solo obtenemos su representación base64
+            resolve(base64Image);
+          } else {
+            reject(new Error('Error al leer la imagen'));
+          }
+        };
+
+        reader.readAsDataURL(imagenFile);
+      } else {
+        resolve(null);
+      }
+    });
+  }
+
+
+  async enviarReceta() {
+    // Obtener los valores del formulario
+    const nombre = (document.querySelector("#nombre") as HTMLInputElement).value;
+    const ingredientes = (document.querySelector("#ingredientes") as HTMLTextAreaElement).value;
+    const preparacion = (document.querySelector("#preparacion") as HTMLTextAreaElement).value;
+    const imagenInput = document.querySelector("#imagen") as HTMLInputElement;
+    const imagen = imagenInput.files && imagenInput.files.length > 0 ? imagenInput.files[0] : null;
+
+    // Crear un objeto de receta con la propiedad 'identificador'
+    const receta = {
+      identificador: 0, // Agregamos una propiedad 'identificador' con un valor inicial de 0
+      nombre,
+      ingredientes,
+      preparacion,
+      imagen: imagen ? await this.getImagen(imagen) : '', // Asume que tienes una función getImagen
+    };
+
+    // Obtener las recetas existentes del Local Storage
     const recetasLocalStorageString = localStorage.getItem("recetas");
-    this.recetasLocalStorages = recetasLocalStorageString ? JSON.parse(recetasLocalStorageString) : [];
+    const recetasLocalStorage = recetasLocalStorageString ? JSON.parse(recetasLocalStorageString) : [];
 
-    // Ahora, recetasLocalStorage contiene las recetas del Local Storage
+    const max = recetasLocalStorage
+      .map((val: any) => val.identificador)
+      .reduce(function (a: any, b: any) {
+        return Math.max(a, b);
+      }, -Infinity);
+    receta.identificador = max && max > 0 ? max + 1 : 0;
+
+    // Agregar la nueva receta
+    recetasLocalStorage.push(receta);
+
+    // Guardar las recetas actualizadas en el Local Storage
+    localStorage.setItem("recetas", JSON.stringify(recetasLocalStorage));
+
+    // También, agrega la nueva receta a la lista de recetas en tu componente (asumiendo que tienes una variable como this.recetasLocalStorages)
+    this.recetasLocalStorages.push(receta);
+
+    // Restablece el formulario (deberías hacerlo en Angular de una manera más reactiva en lugar de manipular directamente el DOM)
+    const recetaForm = document.querySelector("form") as HTMLFormElement;
+    recetaForm.reset();
   }
-  
+
+
 }
